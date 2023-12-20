@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 const openai = new OpenAI({
-	apiKey: "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", // defaults to process.env["OPENAI_API_KEY"]
+	apiKey: "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",
 });
 import express from "express";
 
@@ -27,20 +27,19 @@ app.listen(port, () => {
 });
 
 async function getComment(post) {
-	const stream = await openai.chat.completions.create({
-		model: "gpt-3.5-turbo",
-		max_tokens: 100,
+	const chatCompletion = await openai.chat.completions.create({
 		messages: [
 			{
 				role: "user",
-				content: `Тебе дан пост на Reddit: "${post}". Придумай персонализированный комментарий на английском языке, который получит положительную оценку от других пользовтателей. Комментарий должен отражать личный опыт.`,
+				content: `Тебе дан пост на Reddit: "${post}". Придумай персонализированный комментарий на английском языке, который получит положительную оценку от других пользовтателей. Комментарий должен отражать личный опыт. Комментарий должен быть содержательным и коротким. Длинна комментария не более 4 строк.`,
 			},
 		],
-		stream: true,
+		model: "gpt-3.5-turbo",
+		max_tokens: 200,
 	});
-	let result = "";
-	for await (const chunk of stream) {
-		result = result + chunk.choices[0]?.delta?.content || "";
-	}
+
+	let result = chatCompletion.choices[0].message.content;
+	console.log(result);
+
 	return result;
 }
