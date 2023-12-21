@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 const openai = new OpenAI({
-	apiKey: "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",
+	apiKey: process.env.API_KEY,
 });
 import express from "express";
 
