@@ -31,7 +31,7 @@ async function getComment(post) {
 		messages: [
 			{
 				role: "user",
-				content: `Тебе дан пост на Reddit: "${post}". Придумай пероснализированный комменатрий, который собрал бы наибольшее количество лайков. Комметнатрий должен быть короткий, не более 3 строк. Do not use hashtahs!!! Do not use smiles and emoji!!!`,
+				content: `You are given a post on Reddit: "${post}". Come up with a personalized comment that would get the most likes. The comment should be short, no more than 3 lines. Do not use hashtags!!! Do not use smiles and emoji!!!`,
 			},
 		],
 		model: "gpt-3.5-turbo",
